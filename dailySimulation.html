@@ -7,13 +7,50 @@
 <body style="font-family: sans-serif; text-align: center; padding-top: 60px; background-color: #eef;">
 
   <h1>My Simulated Day</h1>
+    <div id="time" style="margin-top: 40px; font-size: 1.5rem;"></div>
   <div id="output" style="margin-top: 40px; font-size: 1.5rem;"></div>
 
   <script>
     const output = document.getElementById("output");
-    
-    // ADD CODE HERE
+    const time = document.getElementById("time");
 
+
+    // Clock
+    const hours = ["12", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"];
+    const min1 = ["0", "1", "2", "3", "4", "5"];
+    const min2 = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+    const ampm = ["AM", "PM"];
+
+    let indexHours = 0;
+    let indexMin1 = 0;
+    let indexMin2 = 0;
+    let indexampm = 0;
+
+    time.textContent = hours[indexHours] + ":" + min1[indexMin1] + min2[indexMin2] + ampm[indexampm]; 
+    output.textContent = "";
+
+    const clockInterval = setInterval(() => {
+        indexMin2 ++;
+        if (indexMin2 === min2.length){
+            indexMin2 = 0;
+            indexMin1 ++;
+        }
+        if (indexMin1 === min1.length){
+            indexMin1 = 0;
+            indexHours ++;
+        }
+        if (indexHours === hours.length){
+            indexHours = 0;
+            if (indexampm === 0){
+                indexampm = 1;
+            }
+            else{
+                indexampm = 0;
+            }
+            
+        }
+        time.textContent = hours[indexHours] + ":" + min1[indexMin1] + min2[indexMin2] + ampm[indexampm]; 
+    }, 75);
   </script>
 
 </body>
