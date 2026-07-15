@@ -14,7 +14,6 @@
     const output = document.getElementById("output");
     const time = document.getElementById("time");
 
-
     // Clock
     const hours = ["12", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"];
     const min1 = ["0", "1", "2", "3", "4", "5"];
@@ -25,11 +24,15 @@
     let indexMin1 = 0;
     let indexMin2 = 0;
     let indexampm = 0;
+    let randomNumber;
 
     time.textContent = hours[indexHours] + ":" + min1[indexMin1] + min2[indexMin2] + ampm[indexampm]; 
-    output.textContent = "";
+    output.textContent = "Sleeping 💤"
 
     const clockInterval = setInterval(() => {
+ 
+        // Clock
+    
         indexMin2 ++;
         if (indexMin2 === min2.length){
             indexMin2 = 0;
@@ -43,14 +46,50 @@
             indexHours = 0;
             if (indexampm === 0){
                 indexampm = 1;
+                randomNumber = Math.floor(Math.random() * 2); // Random number resets daily
             }
             else{
                 indexampm = 0;
             }
-            
+        }
+
+        // Actions
+        if(ampm[indexampm] === "AM"){
+            if(hours[indexHours] === "7"){
+                output.textContent = "Waking up ☀️";
+            }
+            if(hours[indexHours] === "10"){
+                output.textContent = "Going to library 📚";
+            }
+            if(hours[indexHours] === "11"){
+                output.textContent = "Completing homework 📖"
+            }
+        }
+        else{
+            if(hours[indexHours] === "1"){
+                output.textContent = "Eating lunch 🍽️"
+            }
+            if(hours[indexHours] === "3"){
+                output.textContent = "Going home 🏠"
+            }
+            if(hours[indexHours] === "5" && randomNumber === 0){
+                output.textContent = "Practicing piano 🎶"
+            }
+            else if (hours[indexHours] === "5"){
+                output.textContent = "Practicing cello 🎶"  
+            }
+            if(hours[indexHours] === "7"){
+                output.textContent = "Eating dinner 🍽️"
+            }
+            if(hours[indexHours] === "9"){
+                output.textContent = "Watching a movie 🎬"
+            }
+            if(hours[indexHours] === "11"){
+                output.textContent = "Sleeping 💤"
+            }
         }
         time.textContent = hours[indexHours] + ":" + min1[indexMin1] + min2[indexMin2] + ampm[indexampm]; 
-    }, 75);
+    }, 25);
   </script>
 
 </body>
